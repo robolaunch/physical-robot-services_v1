@@ -1,9 +1,9 @@
-import rosClient from "./clients/ros";
+import rosMetricListener from "./functions/rosMetricListener";
+import test from "./test/test";
 
-const listener = rosClient.createSubscription(
-  "std_msgs/msg/String",
-  "my_topic",
-  (msg: any) => {
-    console.log(`${msg.data}`);
-  }
-);
+function main() {
+  test();
+  rosMetricListener();
+}
+
+main();

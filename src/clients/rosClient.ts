@@ -4,6 +4,6 @@ rclnodejs.init();
 
 const rosClient = new rclnodejs.Node("rcnodejs_client");
 
-rclnodejs.spin(rosClient);
+rosClient.spin();
 
 export default rosClient;
