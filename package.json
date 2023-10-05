@@ -1,7 +1,7 @@
 {
-  "name": "robot-metric-service",
+  "name": "robot-service",
   "version": "0.0.2",
-  "description": "robot-metric-service",
+  "description": "robot-service",
   "main": "src/index.ts",
   "scripts": {
     "build": "npx tsc",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/robolaunch/robot-metric-service"
+    "url": "https://github.com/robolaunch/robot-service"
   },
   "author": "gokhangunduz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/robolaunch/robot-metric-service/issues"
+    "url": "https://github.com/robolaunch/robot-service/issues"
   },
-  "homepage": "https://github.com/robolaunch/robot-metric-service#readme",
+  "homepage": "https://github.com/robolaunch/robot-service#readme",
   "dependencies": {
     "concurrently": "^8.2.1",
     "rclnodejs": "^0.23.1"
