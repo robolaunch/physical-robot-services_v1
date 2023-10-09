@@ -1,11 +1,11 @@
+import databaseCreationFlow from "./functions/databaseCreationFlow";
 import express, { Request, Response, NextFunction } from "express";
 import rosBarcodeListener from "./functions/rosBarcodeListener";
-import createDatabaseFlow from "./functions/createDatabaseFlow";
 import barcodeRouters from "./routes/barcode.routes";
+import { envPort } from "./providers/envProvider";
 import appRouters from "./routes/app.routes";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { envPort } from "./providers/envProvider";
 
 function main() {
   const app = express();
@@ -28,7 +28,7 @@ function main() {
   app.use("/barcode", barcodeRouters);
 
   app.listen(envPort, async function () {
-    await createDatabaseFlow();
+    await databaseCreationFlow();
     await rosBarcodeListener();
     await console.log(
       `[Physical Robot Services] Service is running on port ${envPort}`

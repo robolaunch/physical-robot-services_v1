@@ -1,7 +1,7 @@
 {
-  "name": "robot-service",
-  "version": "0.0.4",
-  "description": "robot-service",
+  "name": "physical-robot-services",
+  "version": "0.0.5",
+  "description": "physical-robot-services",
   "main": "src/index.ts",
   "scripts": {
     "build": "npx tsc",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/robolaunch/robot-service"
+    "url": "https://github.com/robolaunch/physical-robot-services"
   },
   "author": "gokhangunduz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/robolaunch/robot-service/issues"
+    "url": "https://github.com/robolaunch/physical-robot-services/issues"
   },
-  "homepage": "https://github.com/robolaunch/robot-service#readme",
+  "homepage": "https://github.com/robolaunch/physical-robot-services#readme",
   "dependencies": {
     "axios": "^1.5.1",
     "concurrently": "^8.2.1",
