@@ -22,9 +22,7 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Quick Start](#quick-start)
-- [Aims & Roadmap](#aims--roadmap)
 - [Contributing](#contributing)
 
 ## Quick Start
