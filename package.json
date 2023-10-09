@@ -1,6 +1,6 @@
 {
   "name": "physical-robot-services",
-  "version": "0.0.5",
+  "version": "0.2.3",
   "description": "physical-robot-services",
   "main": "src/index.ts",
   "scripts": {
