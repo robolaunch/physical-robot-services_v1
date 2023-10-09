@@ -1,39 +1,33 @@
-import responseSetter from "../helper/responseSetter";
+import setResponse from "../helper/setResponse";
 import { Request, Response } from "express";
 import dbClient from "../clients/dbClient";
 
 async function get(req: Request, res: Response) {
   try {
     dbClient.serialize(() => {
-      dbClient.get("SELECT * FROM barcodes", (err, row) => {
-        if (err) throw err;
-
-        responseSetter(res, 200, "Data retrieved successfully.", row || []);
+      dbClient.all("SELECT * FROM barcodes", (err, rows) => {
+        setResponse(res, 200, "Data retrieved successfully.", rows || []);
       });
     });
   } catch (error) {
-    console.log(error);
-
-    responseSetter(res, 500, "An error occurred while fetching data.");
+    setResponse(res, 500, "An error occurred while fetching data.");
   }
 }
 
 async function getWithTime(req: Request, res: Response) {
   try {
-    const unixTimeParam = parseInt(req.params.time);
-
     dbClient.serialize(() => {
       dbClient.all(
         "SELECT * FROM barcodes WHERE time >= ?",
-        [unixTimeParam],
+        [parseInt(req.params.time)],
         (err, rows) => {
           if (err) throw err;
-          responseSetter(res, 200, "Data retrieved successfully.", rows);
+          setResponse(res, 200, "Data retrieved successfully.", rows);
         }
       );
     });
   } catch (error) {
-    responseSetter(res, 500, "An error occurred while fetching data.");
+    setResponse(res, 500, "An error occurred while fetching data.");
   }
 }
 
@@ -52,7 +46,7 @@ async function post(req: Request, res: Response) {
             }
 
             if (existingRow) {
-              responseSetter(res, 400, "Barcode already exists in the table.");
+              setResponse(res, 400, "Barcode already exists in the table.");
               resolve();
             } else {
               dbClient.run(
@@ -69,7 +63,7 @@ async function post(req: Request, res: Response) {
                   if (insertErr) {
                     throw insertErr;
                   } else {
-                    responseSetter(res, 201, "Data added successfully.");
+                    setResponse(res, 201, "Data added successfully.");
                     resolve();
                   }
                 }
@@ -80,7 +74,7 @@ async function post(req: Request, res: Response) {
       });
     });
   } catch (error) {
-    responseSetter(res, 500, "An error occurred while processing the request.");
+    setResponse(res, 500, "An error occurred while processing the request.");
   }
 }
 
@@ -100,9 +94,9 @@ async function remove(req: Request, res: Response) {
         );
       });
     });
-    responseSetter(res, 200, "All data moved to barcodes_log successfully.");
+    setResponse(res, 200, "All data moved to barcodes_log successfully.");
   } catch (error) {
-    responseSetter(res, 500, "Error while moving data to barcodes_log.");
+    setResponse(res, 500, "Error while moving data to barcodes_log.");
   }
 }
 

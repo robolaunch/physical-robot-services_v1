@@ -1,7 +1,5 @@
-import { Response } from "express";
-
-export default function responseSetter(
-  response: Response,
+export default function setResponse(
+  response: any,
   status: number,
   message: string,
   data?: any
@@ -9,7 +7,6 @@ export default function responseSetter(
   console.log(
     `[${response.req.method} ${status} - ${response.req.baseUrl}] ${message}`
   );
-
   response.status(status).json({
     success: status < 300 ? true : false,
     message: message,
