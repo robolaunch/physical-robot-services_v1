@@ -7,10 +7,13 @@ async function get(req: Request, res: Response) {
     dbClient.serialize(() => {
       dbClient.get("SELECT * FROM barcodes", (err, row) => {
         if (err) throw err;
-        responseSetter(res, 200, "Data retrieved successfully.", row);
+
+        responseSetter(res, 200, "Data retrieved successfully.", row || []);
       });
     });
   } catch (error) {
+    console.log(error);
+
     responseSetter(res, 500, "An error occurred while fetching data.");
   }
 }

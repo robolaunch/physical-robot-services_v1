@@ -7,7 +7,7 @@ export default function responseSetter(
   data?: any
 ) {
   console.log(
-    `[${response.req.method} ${status} - ${response.req.url}] ${message}`
+    `[${response.req.method} ${status} - ${response.req.baseUrl}] ${message}`
   );
 
   response.status(status).json({

@@ -58,7 +58,6 @@ async function createTables() {
               console.log("[Database] Tables created successfully!");
               resolve();
             }
-            dbClient.close();
           }
         );
       });
