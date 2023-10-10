@@ -2,10 +2,12 @@ import databaseCreationFlow from "./functions/databaseCreationFlow";
 import express, { Request, Response, NextFunction } from "express";
 import rosBarcodeListener from "./functions/rosBarcodeListener";
 import barcodeRouters from "./routes/barcode.routes";
-import { envPort } from "./providers/envProvider";
+import { envRobotPort } from "./providers/envProvider";
 import appRouters from "./routes/app.routes";
 import bodyParser from "body-parser";
 import cors from "cors";
+import taskRoutes from "./routes/task.routes";
+import logRouters from "./routes/log.routes";
 
 function main() {
   const app = express();
@@ -23,16 +25,27 @@ function main() {
     })
   );
 
-  app.use("/", appRouters);
-
   app.use("/barcode", barcodeRouters);
 
-  app.listen(envPort, async function () {
+  app.use("/log", logRouters);
+
+  app.use("/task", taskRoutes);
+
+  app.use("/", appRouters);
+
+  const server = app.listen(envRobotPort, async function () {
     await databaseCreationFlow();
     await rosBarcodeListener();
     await console.log(
-      `[Physical Robot Services] Service is running on port ${envPort}`
+      `[Physical Robot Services] Service is running on port ${envRobotPort}`
     );
+  });
+
+  process.on("SIGINT", () => {
+    server.close(() => {
+      console.log("[Physical Robot Services] Service is shutting down");
+      process.exit(0);
+    });
   });
 }
 

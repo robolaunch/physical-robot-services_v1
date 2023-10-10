@@ -55,6 +55,20 @@ async function createTables() {
                   "location_z INTEGER" +
                   ");"
               );
+              dbClient.run(
+                "CREATE TABLE IF NOT EXISTS tasks (" +
+                  "task_id TEXT, " +
+                  "task_name TEXT, " +
+                  "task_json TEXT" +
+                  ");"
+              );
+              dbClient.run(
+                "CREATE TABLE IF NOT EXISTS tasks_log (" +
+                  "time TEXT, " +
+                  "method TEXT, " +
+                  "log TEXT" +
+                  ");"
+              );
               console.log("[Database] Tables created successfully!");
               resolve();
             }
